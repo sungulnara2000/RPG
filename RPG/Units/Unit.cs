@@ -14,12 +14,11 @@ namespace RPG.Units
     {
         public State State { get; set; }
 
-        public int Health
-        {
-            get; set;
-        }
+        public int Health { get; set; }
 
         public int Weapons { get; set; }
+
+        public int Hit { get; set; }
 
         public bool IsAlive
         {

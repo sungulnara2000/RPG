@@ -11,6 +11,7 @@ namespace RPG.Units
         public FireMan()
         {
             Hit = 20;
+            Health = 80;
         }
     }
 }

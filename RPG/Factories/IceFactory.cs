@@ -13,11 +13,7 @@ namespace RPG.Factories
     {
         public override Unit CreateUnit()
         {
-            return new IceMan()
-            {
-                Lives = new Life[] {new Life(), new Life(), new Life()},
-                Weapons = new Weapon[] {new Ice(), new Ice(), new Ice()}
-            };
+            return new IceMan();
         }
 
         public override Weapon CreateWeapon()
