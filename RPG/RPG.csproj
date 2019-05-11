@@ -58,13 +58,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Enums\Level.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="Factories\ArcherFactory.cs" />
     <Compile Include="Factories\Factory.cs" />
     <Compile Include="Factories\FireFactory.cs" />
     <Compile Include="Factories\IceFactory.cs" />
     <Compile Include="GameBoard\GameBoard.cs" />
+    <Compile Include="GameBoard\GameBoardBuilder.cs" />
+    <Compile Include="GameBoard\HardGameBoardDirector.cs" />
+    <Compile Include="GameBoard\IGameBoardBuilder.cs" />
+    <Compile Include="GameBoard\IGameBoardDirector.cs" />
     <Compile Include="GameBoard\IItem.cs" />
+    <Compile Include="GameBoard\LightGameBoardDirector.cs" />
+    <Compile Include="GameBoard\MediumGameBoardDirector.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Goods\Arrow.cs" />
     <Compile Include="Goods\Fire.cs" />
     <Compile Include="Goods\Ice.cs" />
@@ -75,8 +85,11 @@
     <Compile Include="Goods\Weapon.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Units\Archer.cs" />
+    <Compile Include="Units\BlueArmy.cs" />
     <Compile Include="Units\FireMan.cs" />
+    <Compile Include="Units\IArmy.cs" />
     <Compile Include="Units\IceMan.cs" />
+    <Compile Include="Units\RedArmy.cs" />
     <Compile Include="Units\States\PauseState.cs" />
     <Compile Include="Units\States\PlayingState.cs" />
     <Compile Include="Units\States\ReadyState.cs" />
@@ -85,6 +98,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +125,25 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Archer.png" />
+    <Resource Include="Resources\Arrow.png" />
+    <Resource Include="Resources\Box.png" />
+    <Resource Include="Resources\Coin.png" />
+    <Resource Include="Resources\Fire.png" />
+    <Resource Include="Resources\FireMan.png" />
+    <Resource Include="Resources\Ground.png" />
+    <Resource Include="Resources\Ice.png" />
+    <Resource Include="Resources\IceMan.png" />
+    <Resource Include="Resources\Life.png" />
+    <Resource Include="Resources\Wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
