@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RPG.GameBoard;
 using RPG.Goods;
+using RPG.Factories;
 
 namespace RPG.Units
 {
@@ -17,28 +18,23 @@ namespace RPG.Units
 
         public void Initialize(int archers, int firemen, int icemen)
         {
+            var archerFactory = new ArcherFactory();
+            var fireFactory = new FireFactory();
+            var iceFactory = new IceFactory();
+
             for (int i = 0; i < archers; i++)
             {
-                Add(new Archer()
-                {
-                    Army = this
-                });
+                Add(archerFactory.CreateUnit(this));
             }
 
             for (int i = 0; i < firemen; i++)
             {
-                Add(new FireMan()
-                {
-                    Army = this
-                });
+                Add(fireFactory.CreateUnit(this));
             }
 
             for (int i = 0; i < icemen; i++)
             {
-                Add(new IceMan()
-                {
-                    Army = this
-                });
+                Add(iceFactory.CreateUnit(this));
             }
         }
 
@@ -57,11 +53,26 @@ namespace RPG.Units
             _units.Clear();
         }
 
-        public void Attack(GameBoard.GameBoard gameBoard)
+        public bool IsAlive()
+        {
+            return Units.Any(u => ((Unit) u).IsAlive);
+        }
+
+        public int Count()
+        {
+            return Units.Count;
+        }
+
+        public int AliveCount()
+        {
+            return Units.Count(u => ((Unit) u).IsAlive);
+        }
+
+        public void Act(GameBoard.GameBoard gameBoard)
         {
             foreach (var unit in _units)
             {
-                unit.Attack(gameBoard);
+                unit.Act(gameBoard);
             }
         }
 

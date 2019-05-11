@@ -40,11 +40,12 @@ namespace RPG.GameBoard
             }
 
             life = new Life { X = _lifePosition.Item1, Y = _lifePosition.Item2 };
-            weapon = new Weapon { X = _weaponPosition.Item1, Y = _weaponPosition.Item2 };
+            weapon = new Box { X = _weaponPosition.Item1, Y = _weaponPosition.Item2 };
 
             _builder.SetUnits(reds);
             _builder.SetUnits(blues);
-            _builder.SetStuff(life, weapon);
+            _builder.SetUnit(life);
+            _builder.SetUnit(weapon);
         }
 
         private Tuple<int, int> _lifePosition;

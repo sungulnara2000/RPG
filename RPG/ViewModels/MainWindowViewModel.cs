@@ -42,6 +42,8 @@ namespace RPG.ViewModels
             set { SetProperty(ref _roundTime, value); }
         }
 
+
+
         public GameBoard.GameBoard GameBoard
         {
             get { return _gameBoard; }

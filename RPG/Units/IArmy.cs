@@ -17,7 +17,13 @@ namespace RPG.Units
 
         void Clear();
 
-        void Attack(GameBoard.GameBoard gameBoard);
+        bool IsAlive();
+
+        int Count();
+
+        int AliveCount();
+
+        void Act(GameBoard.GameBoard gameBoard);
 
         ICollection<IItem> Units { get; }
     }

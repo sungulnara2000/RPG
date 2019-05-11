@@ -10,9 +10,13 @@ namespace RPG.Factories
 {
     public class ArcherFactory : Factory
     {
-        public override Unit CreateUnit()
+        public override Unit CreateUnit(IArmy army)
         {
-            return new Archer();
+            var archer = new Archer();
+            archer.Army = army;
+            archer.Hit = 30;
+            archer.Health = 70;
+            return archer;
         }
 
         public override Weapon CreateWeapon()

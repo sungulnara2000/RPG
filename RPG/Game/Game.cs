@@ -47,6 +47,7 @@ namespace RPG.Game
             GameBoard = builder.GetGameBoard();
         }
 
+
         private IItem _life;
         private IItem _weapon;
 

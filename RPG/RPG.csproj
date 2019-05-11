@@ -70,31 +70,32 @@
     <Compile Include="GameBoard\GameBoardBuilder.cs" />
     <Compile Include="GameBoard\HardGameBoardDirector.cs" />
     <Compile Include="GameBoard\IGameBoardBuilder.cs" />
-    <Compile Include="GameBoard\IGameBoardDirector.cs" />
     <Compile Include="GameBoard\IItem.cs" />
+    <Compile Include="GameBoard\IGameBoardDirector.cs" />
     <Compile Include="GameBoard\LightGameBoardDirector.cs" />
     <Compile Include="GameBoard\MediumGameBoardDirector.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Goods\Arrow.cs" />
+    <Compile Include="Goods\Box.cs" />
+    <Compile Include="Goods\Coin.cs" />
     <Compile Include="Goods\Fire.cs" />
-    <Compile Include="Goods\Ice.cs" />
     <Compile Include="Goods\Good.cs" />
     <Compile Include="Goods\Ground.cs" />
+    <Compile Include="Goods\Ice.cs" />
     <Compile Include="Goods\Life.cs" />
     <Compile Include="Goods\Wall.cs" />
     <Compile Include="Goods\Weapon.cs" />
-    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Units\Archer.cs" />
     <Compile Include="Units\BlueArmy.cs" />
     <Compile Include="Units\FireMan.cs" />
     <Compile Include="Units\IArmy.cs" />
     <Compile Include="Units\IceMan.cs" />
     <Compile Include="Units\RedArmy.cs" />
-    <Compile Include="Units\States\PauseState.cs" />
-    <Compile Include="Units\States\PlayingState.cs" />
-    <Compile Include="Units\States\ReadyState.cs" />
-    <Compile Include="Units\States\State.cs" />
     <Compile Include="Units\Unit.cs" />
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -104,11 +105,17 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -117,6 +124,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -127,23 +135,43 @@
     <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Archer.png" />
-    <Resource Include="Resources\Arrow.png" />
-    <Resource Include="Resources\Box.png" />
-    <Resource Include="Resources\Coin.png" />
-    <Resource Include="Resources\Fire.png" />
-    <Resource Include="Resources\FireMan.png" />
-    <Resource Include="Resources\Ground.png" />
-    <Resource Include="Resources\Ice.png" />
-    <Resource Include="Resources\IceMan.png" />
-    <Resource Include="Resources\Life.png" />
-    <Resource Include="Resources\Wall.png" />
+    <Resource Include="Resources\Coin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Resource Include="Resources\Archer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Life.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Box.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fire.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\FireMan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Ground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Ice.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Wall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\IceMan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

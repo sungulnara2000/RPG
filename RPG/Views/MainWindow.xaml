@@ -31,12 +31,12 @@
                     <DataTemplate DataType="{x:Type goods:Life}">
                         <Image Source="../Resources/Life.png"/>
                     </DataTemplate>
-                    <!--<DataTemplate DataType="{x:Type goods:Coin}">
+                    <DataTemplate DataType="{x:Type goods:Coin}">
                         <Image Source="../Resources/Coin.png"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Box}">
                         <Image Source="../Resources/Box.png"/>
-                    </DataTemplate>-->
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Fire}">
                         <Image Source="../Resources/Fire.png"/>
                     </DataTemplate>

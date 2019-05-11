@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPG.Goods
 {
-    public class Arrow : Weapon
+    public class Box : Good
     {
     }
 }

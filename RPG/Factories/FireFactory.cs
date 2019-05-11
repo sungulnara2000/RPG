@@ -10,9 +10,13 @@ namespace RPG.Factories
 {
     public class FireFactory : Factory
     {
-        public override Unit CreateUnit()
+        public override Unit CreateUnit(IArmy army)
         {
-            return new FireMan();
+            var fireMan = new FireMan();
+            fireMan.Army = army;
+            fireMan.Hit = 20;
+            fireMan.Health = 80;
+            return fireMan;
         }
 
         public override Weapon CreateWeapon()

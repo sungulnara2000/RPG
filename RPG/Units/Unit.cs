@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 using RPG.Enums;
 using RPG.GameBoard;
 using RPG.Goods;
-using RPG.Units.States;
 
 namespace RPG.Units
 {
     public abstract class Unit : IItem
     {
-        public State State { get; set; }
-
         public IArmy Army { get; set; }
 
         public int Health { get; set; }
@@ -158,15 +155,15 @@ namespace RPG.Units
 
         public void ChangeDirection()
         {
-            direction = (Direction)((int)direction + 1);
+            direction = (Direction)(((int)direction + 1) % 4);
         }
 
-        public void Act(GameBoard.GameBoard gameBoard, Direction direction)
+        public void Act(GameBoard.GameBoard gameBoard)
         {
             switch (direction)
             {
                 case Direction.LEFT:
-                    if (gameBoard.GameBoardItems[Y][X - 1] is Wall || X - 1 < 0)
+                    if (X - 1 < 0 || gameBoard.GameBoardItems[Y][X - 1] is Wall )
                     {
                         ChangeDirection();
                         break;
@@ -177,7 +174,7 @@ namespace RPG.Units
                     }
                     break;
                 case Direction.UP:
-                    if (gameBoard.GameBoardItems[Y - 1][X] is Wall || Y - 1 < 0)
+                    if (Y - 1 < 0 || gameBoard.GameBoardItems[Y - 1][X] is Wall )
                     {
                         ChangeDirection();
                         break;
@@ -188,7 +185,7 @@ namespace RPG.Units
                     }
                     break;
                 case Direction.RIGHT:
-                    if (gameBoard.GameBoardItems[Y][X + 1] is Wall || X + 1 >= gameBoard.Width)
+                    if ( X + 1 >= gameBoard.Width || gameBoard.GameBoardItems[Y][X + 1] is Wall )
                     {
                         ChangeDirection();
                         break;
@@ -199,7 +196,7 @@ namespace RPG.Units
                     }
                     break;
                 case Direction.DOWN:
-                    if (gameBoard.GameBoardItems[Y + 1][X] is Wall || Y + 1 >= gameBoard.Height)
+                    if ( Y + 1 >= gameBoard.Height || gameBoard.GameBoardItems[Y + 1][X] is Wall )
                     {
                         ChangeDirection();
                         break;
