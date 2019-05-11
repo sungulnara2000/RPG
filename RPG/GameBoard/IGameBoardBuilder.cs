@@ -13,6 +13,8 @@ namespace RPG.GameBoard
 
         void CreateWalls(ICollection<Wall> walls);
 
+        void SetStuff(IItem life, IItem weapon);
+
         void SetUnits(ICollection<IItem> units);
 
         void SetUnit(IItem unit);

@@ -36,6 +36,12 @@ namespace RPG.GameBoard
             }
         }
 
+        public void SetStuff(IItem life, IItem weapon)
+        {
+            _gameBoard.GameBoardItems[life.Y][life.X] = life;
+            _gameBoard.GameBoardItems[weapon.Y][weapon.X] = weapon;
+        }
+
         public void SetUnits(ICollection<IItem> units)
         {
             foreach (var position in units)

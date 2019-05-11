@@ -9,6 +9,6 @@ namespace RPG.GameBoard
 {
     public interface IGameBoardDirector
     {
-        void Create(ICollection<IItem> reds, ICollection<IItem> blues);
+        void Create(ICollection<IItem> reds, ICollection<IItem> blues, IItem life, IItem weapon);
     }
 }

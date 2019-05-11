@@ -22,25 +22,57 @@ namespace RPG.Units
 
         public int Hit { get; set; }
 
-        public Direction direction { get; set; } //direction лучше сделать полем класса
+        public Direction direction { get; set; }
 
         public bool IsAlive
         {
             get { return Health > 0; }
         }
         
-        // gдбираем элемент
-        public void PickUp(IItem temp)
+        public void SetNewStuff(IItem temp, IItem stuff, GameBoard.GameBoard gameBoard)
+        {
+            if (gameBoard.GameBoardItems[temp.X + 1][temp.Y] is Ground)
+            {
+                stuff.X = temp.X + 1;
+                stuff.Y = temp.Y;
+                gameBoard.GameBoardItems[temp.X + 1][temp.Y] = stuff;
+            }
+            if (gameBoard.GameBoardItems[temp.X][temp.Y + 1] is Ground)
+            {
+                stuff.X = temp.X;
+                stuff.Y = temp.Y + 1;
+                gameBoard.GameBoardItems[temp.X][temp.Y + 1] = stuff;
+            }
+            if (gameBoard.GameBoardItems[temp.X - 1][temp.Y] is Ground)
+            {
+                stuff.X = temp.X - 1;
+                stuff.Y = temp.Y;
+                gameBoard.GameBoardItems[temp.X - 1][temp.Y] = stuff;
+            }
+            if (gameBoard.GameBoardItems[temp.X][temp.Y - 1] is Ground)
+            {
+                stuff.X = temp.X;
+                stuff.Y = temp.Y - 1;
+                gameBoard.GameBoardItems[temp.X][temp.Y - 1] = stuff;
+            }
+        }
+
+        // подбираем элемент
+        public void PickUp(IItem temp, GameBoard.GameBoard gameBoard)
         {
             if (temp is Weapon)
             {
                 Weapons += 1;
                 temp = new Ground { X = temp.X, Y = temp.Y };
+                var newWeapon = new Weapon { X = 0, Y = 0 };
+                SetNewStuff(temp, newWeapon, gameBoard);
             }
             if (temp is Life)
             {
                 Health += 1;
                 temp = new Ground { X = temp.X, Y = temp.Y };
+                var newLife = new Life { X = 0, Y = 0 };
+                SetNewStuff(temp, newLife, gameBoard);
             }
         }
 
@@ -53,7 +85,8 @@ namespace RPG.Units
                 case Direction.LEFT:
                     if (X - 1 < 0) break;
                     var temp1 = gameBoard.GameBoardItems[Y][X - 1];
-                    PickUp(temp1);
+                    PickUp(temp1, gameBoard);
+
                     gameBoard.GameBoardItems[Y][X - 1] = this;
                     gameBoard.GameBoardItems[Y][X] = temp1;
                     X -= 1;
@@ -62,7 +95,7 @@ namespace RPG.Units
                 case Direction.UP:
                     if (Y - 1 < 0) break;
                     var temp2 = gameBoard.GameBoardItems[Y - 1][X];
-                    PickUp(temp2);
+                    PickUp(temp2, gameBoard);
                     gameBoard.GameBoardItems[Y - 1][X] = this;
                     gameBoard.GameBoardItems[Y][X] = temp2;
                     Y -= 1;
@@ -71,7 +104,7 @@ namespace RPG.Units
                 case Direction.RIGHT:
                     if (X + 1 >= gameBoard.Width) break;
                     var temp3 = gameBoard.GameBoardItems[Y][X + 1];
-                    PickUp(temp3);
+                    PickUp(temp3, gameBoard);
                     gameBoard.GameBoardItems[Y][X + 1] = this;
                     gameBoard.GameBoardItems[Y][X] = temp3;
                     X += 1;
@@ -80,7 +113,7 @@ namespace RPG.Units
                 case Direction.DOWN:
                     if (Y + 1 >= gameBoard.Height) break;
                     var temp4 = gameBoard.GameBoardItems[Y + 1][X];
-                    PickUp(temp4);
+                    PickUp(temp4, gameBoard);
                     gameBoard.GameBoardItems[Y + 1][X] = this;
                     gameBoard.GameBoardItems[Y][X] = temp4;
                     Y += 1;
@@ -122,7 +155,6 @@ namespace RPG.Units
         public int X { get; set; }
 
         public int Y { get; set; }
-        //Todo: выбрать экшн    
 
         public void ChangeDirection()
         {

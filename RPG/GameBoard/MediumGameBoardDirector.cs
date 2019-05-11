@@ -21,9 +21,12 @@ namespace RPG.GameBoard
                                         new Wall { X = 10, Y = 7 }, new Wall { X = 9, Y = 7 }, new Wall { X = 8, Y = 7 },
                                         new Wall { X = 8, Y = 12 }, new Wall { X = 11, Y = 11 } };
 
+            _lifePosition = new Tuple<int, int>(7, 7);
+            _weaponPosition = new Tuple<int, int>(3, 5);
+
         }
 
-        public void Create(ICollection<IItem> reds, ICollection<IItem> blues)
+        public void Create(ICollection<IItem> reds, ICollection<IItem> blues, IItem life, IItem weapon)
         {
             _builder.SetShape(15, 15);
             int i = 0;
@@ -41,10 +44,18 @@ namespace RPG.GameBoard
                 blue.Y = _bluePositions[i].Item2;
                 ++i;
             }
+
+            life = new Life { X = _lifePosition.Item1, Y = _lifePosition.Item2 };
+            weapon = new Weapon { X = _weaponPosition.Item1, Y = _weaponPosition.Item2 };
+
             _builder.CreateWalls(_walls);
             _builder.SetUnits(reds);
             _builder.SetUnits(blues);
+            _builder.SetStuff(life, weapon);
         }
+
+        private Tuple<int, int> _lifePosition;
+        private Tuple<int, int> _weaponPosition;
 
         private IList<Tuple<int, int>> _redPositions;
         private IList<Tuple<int, int>> _bluePositions;

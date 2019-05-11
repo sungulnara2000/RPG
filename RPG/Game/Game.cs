@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RPG.Enums;
 using RPG.GameBoard;
 using RPG.Units;
+using RPG.Goods;
 
 namespace RPG.Game
 {
@@ -42,11 +43,12 @@ namespace RPG.Game
                 default:
                     throw new NotSupportedException();
             }
-            director.Create(_redArmy.Units, _blueArmy.Units);
+            director.Create(_redArmy.Units, _blueArmy.Units, _life, _weapon);
             GameBoard = builder.GetGameBoard();
         }
 
-
+        private IItem _life;
+        private IItem _weapon;
 
         private RedArmy _redArmy;
         private BlueArmy _blueArmy;
