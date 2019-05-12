@@ -10,7 +10,7 @@ using RPG.Action;
 
 namespace RPG.Units
 {
-    public abstract class Unit : IItem
+    public abstract class Unit : IItem, IActionable
     {
         public IArmy Army { get; set; }
 

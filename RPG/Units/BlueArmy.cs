@@ -9,7 +9,7 @@ using RPG.Factories;
 
 namespace RPG.Units
 {
-    public class BlueArmy : IArmy
+    public class BlueArmy : IArmy, IActionable
     {
         public BlueArmy()
         {

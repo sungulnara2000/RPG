@@ -88,6 +88,7 @@
     <Compile Include="Goods\Life.cs" />
     <Compile Include="Goods\Wall.cs" />
     <Compile Include="Goods\Weapon.cs" />
+    <Compile Include="Units\IActionable.cs" />
     <Compile Include="Units\Archer.cs" />
     <Compile Include="Units\BlueArmy.cs" />
     <Compile Include="Units\FireMan.cs" />

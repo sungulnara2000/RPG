@@ -7,7 +7,7 @@ using RPG.GameBoard;
 
 namespace RPG.Units
 {
-    public interface IArmy
+    public interface IArmy: IActionable
     {
         void Initialize(int archers, int firemen, int icemen);
 
@@ -30,8 +30,6 @@ namespace RPG.Units
         IceMan IceMan { get; }
 
         void ActWithout(GameBoard.GameBoard gameBoard, Unit unit);
-
-        void Act(GameBoard.GameBoard gameBoard);
 
         void UpdateAliveUnits();
 
