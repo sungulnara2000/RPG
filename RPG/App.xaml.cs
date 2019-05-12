@@ -1,13 +1,12 @@
-﻿using RPG.Views;
+﻿using System.ComponentModel;
+using RPG.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
+using RPG.ViewModels;
 
 namespace RPG
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App
     {
         protected override Window CreateShell()
@@ -17,7 +16,8 @@ namespace RPG
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            var viewLauncher = new ViewLauncher(Container);
+            containerRegistry.RegisterInstance(typeof(ViewLauncher), viewLauncher);
         }
     }
 }

@@ -23,7 +23,17 @@ namespace RPG.Units
 
         int AliveCount();
 
+        Archer Archer { get; }
+
+        FireMan FireMan { get; }
+
+        IceMan IceMan { get; }
+
+        void ActWithout(GameBoard.GameBoard gameBoard, Unit unit);
+
         void Act(GameBoard.GameBoard gameBoard);
+
+        void UpdateAliveUnits();
 
         ICollection<IItem> Units { get; }
     }

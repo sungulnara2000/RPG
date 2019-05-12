@@ -53,6 +53,21 @@ namespace RPG.Units
             _units.Clear();
         }
 
+        public Archer Archer
+        {
+            get { return Units.FirstOrDefault(t => t is Archer) as Archer; }
+        }
+
+        public FireMan FireMan
+        {
+            get { return Units.FirstOrDefault(t => t is FireMan) as FireMan; }
+        }
+
+        public IceMan IceMan
+        {
+            get { return Units.FirstOrDefault(t => t is IceMan) as IceMan; }
+        }
+
         public bool IsAlive()
         {
             return Units.Any(u => ((Unit) u).IsAlive);
@@ -79,6 +94,24 @@ namespace RPG.Units
         public ICollection<IItem> Units
         {
             get { return _units.Select(u => (IItem)u).ToList(); }
+        }
+
+        public void ActWithout(GameBoard.GameBoard gameBoard, Unit unit)
+        {
+            foreach (var u in _units)
+            {
+                if (u == unit) continue;
+                u.Act(gameBoard);
+            }
+        }
+
+        public void UpdateAliveUnits()
+        {
+            var died = Units.Where(u => ((Unit)u).IsAlive).ToList();
+            foreach (var d in died)
+            {
+                Units.Remove(d);
+            }
         }
 
         private ICollection<Unit> _units;

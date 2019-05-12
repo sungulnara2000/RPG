@@ -1,92 +1,232 @@
-﻿<Window x:Class="RPG.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://prismlibrary.com/"
-        xmlns:viewModel="clr-namespace:RPG.ViewModels"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}" 
-        xmlns:local="clr-namespace:RPG.Views"
-        xmlns:gameBoard="clr-namespace:RPG.GameBoard"
-        xmlns:converter="clr-namespace:RPG.Converters"
-        xmlns:goods="clr-namespace:RPG.Goods"
-        xmlns:units="clr-namespace:RPG.Units"
-        xmlns:enums="clr-namespace:RPG.Enums"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="RPG" Height="350" Width="525"
-        WindowStyle="None" ResizeMode="NoResize"  
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+﻿<Window
+    x:Class="RPG.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:RPG.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:gameBoard="clr-namespace:RPG.GameBoard"
+    xmlns:goods="clr-namespace:RPG.Goods"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:units="clr-namespace:RPG.Units"
+    xmlns:viewModel="clr-namespace:RPG.ViewModels"
+    Title="RPG"
+    d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding Key="A" Command="{Binding MoveLeftCommand}" />
+        <KeyBinding Key="W" Command="{Binding MoveUpCommand}" />
+        <KeyBinding Key="D" Command="{Binding MoveRightCommand}" />
+        <KeyBinding Key="S" Command="{Binding MoveDownCommand}" />
+        <KeyBinding Key="Space" Command="{Binding AttackCommand}" />
+    </Window.InputBindings>
     <Window.Resources>
-        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         <DataTemplate x:Key="DataTemplate_Level2">
-            <ContentControl Content="{Binding}" BorderThickness="0.5" BorderBrush="Black">
+            <ContentControl
+                BorderBrush="Black"
+                BorderThickness="0.5"
+                Content="{Binding}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type goods:Wall}">
-                        <Image Source="../Resources/Wall.png"/>
+                        <Image Source="../Resources/Wall.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Ground}">
-                        <Image Source="../Resources/Ground.png"/>
+                        <Image Source="../Resources/Ground.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Life}">
-                        <Image Source="../Resources/Life.png"/>
+                        <Image Source="../Resources/Life.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Coin}">
-                        <Image Source="../Resources/Coin.png"/>
+                        <Image Source="../Resources/Coin.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Box}">
-                        <Image Source="../Resources/Box.png"/>
+                        <Image Source="../Resources/Box.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Fire}">
-                        <Image Source="../Resources/Fire.png"/>
+                        <Image Source="../Resources/Fire.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Ice}">
-                        <Image Source="../Resources/Ice.png"/>
+                        <Image Source="../Resources/Ice.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type goods:Arrow}">
-                        <Image Source="../Resources/Arrow.png"/>
+                        <Image Source="../Resources/Arrow.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type units:Archer}">
-                        <Image Source="../Resources/Archer.png"/>
+                        <Image Source="../Resources/Archer.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type units:IceMan}">
-                        <Image Source="../Resources/IceMan.png"/>
+                        <Image Source="../Resources/IceMan.png" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type units:FireMan}">
-                        <Image Source="../Resources/FireMan.png"/>
+                        <Image Source="../Resources/FireMan.png" />
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </DataTemplate>
         <DataTemplate x:Key="DataTemplate_Level1">
-            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level2}" ItemsSource="{Binding}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
-        <UniformGrid Columns="3" Rows="1" DockPanel.Dock="Top" Height="Auto" IsEnabled="{Binding IsStarted, Converter={StaticResource InverseBooleanConverter}}">
+        <UniformGrid
+            Height="Auto"
+            Background="LightGray"
+            Columns="3"
+            DockPanel.Dock="Top"
+            IsEnabled="{Binding IsStarted, Converter={StaticResource InverseBooleanConverter}}"
+            Rows="1">
             <StackPanel Margin="5">
-                <TextBlock Text="Выберите роль:" FontWeight="Bold" Padding="5"/>
-                <RadioButton Content="Лучник" Padding="3" Command="{Binding SetPlayerCommand}" CommandParameter="0"/>
-                <RadioButton Content="Человек-огня" Padding="3" Command="{Binding SetPlayerCommand}" CommandParameter="1"/>
-                <RadioButton Content="Человек-льда" Padding="3" Command="{Binding SetPlayerCommand}" CommandParameter="2"/>
+                <TextBlock
+                    Padding="5"
+                    FontWeight="Bold"
+                    Text="Выберите роль:" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetPlayerCommand}"
+                    CommandParameter="0"
+                    Content="Лучник" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetPlayerCommand}"
+                    CommandParameter="1"
+                    Content="Человек-огня" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetPlayerCommand}"
+                    CommandParameter="2"
+                    Content="Человек-льда" />
             </StackPanel>
             <StackPanel Margin="5">
-                <TextBlock Text="Выберите сложность:" FontWeight="Bold" Padding="5"/>
-                <RadioButton Content="Легко" Padding="3" Command="{Binding SetLevelCommand}" CommandParameter="0"/>
-                <RadioButton Content="Нормально" Padding="3" Command="{Binding SetLevelCommand}" CommandParameter="1"/>
-                <RadioButton Content="Сложно" Padding="3" Command="{Binding SetLevelCommand}" CommandParameter="2"/>
+                <TextBlock
+                    Padding="5"
+                    FontWeight="Bold"
+                    Text="Выберите сложность:" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetLevelCommand}"
+                    CommandParameter="0"
+                    Content="Легко" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetLevelCommand}"
+                    CommandParameter="1"
+                    Content="Нормально" />
+                <RadioButton
+                    Padding="3"
+                    Command="{Binding SetLevelCommand}"
+                    CommandParameter="2"
+                    Content="Сложно" />
             </StackPanel>
-            <Button Content="Играть!" Background="YellowGreen" FontSize="40" Command="{Binding StartCommand}"/>
+            <Button
+                Background="YellowGreen"
+                Command="{Binding StartCommand}"
+                Content="Играть!"
+                FontSize="40" />
         </UniformGrid>
-        <StackPanel DockPanel.Dock="Left" Width="Auto">
-            <TextBlock FontSize="50" Text="{Binding RoundTime}"/>
+        <Grid Background="AntiqueWhite" DockPanel.Dock="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="5"
+                Padding="5"
+                Text="Игрок:" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="5"
+                Padding="5"
+                Text="Горизонталь:" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="5"
+                Padding="5"
+                Text="Вертикаль:" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="5"
+                Padding="5"
+                Text="Здоровье:" />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="5"
+                Padding="5"
+                Text="Оружий:" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="5"
+                Padding="5"
+                Text="{Binding Name}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Padding="5"
+                Text="{Binding X}" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="5"
+                Padding="5"
+                Text="{Binding Y}" />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="5"
+                Padding="5"
+                Text="{Binding Health}" />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="5"
+                Padding="5"
+                Text="{Binding Weapons}" />
+        </Grid>
+        <StackPanel DockPanel.Dock="Bottom">
+            <TextBlock
+                Margin="5"
+                Padding="5"
+                Text="W, A, S, D - перемещение" />
+            <TextBlock
+                Margin="5"
+                Padding="5"
+                Text="Space - удар" />
         </StackPanel>
-        <ItemsControl Margin="20" ItemsSource="{Binding GameBoard.GameBoardItems}" ItemTemplate="{StaticResource DataTemplate_Level1}"/>
+        <ContentControl Content="{Binding GameBoard}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate DataType="{x:Type gameBoard:GameBoard}">
+                    <ItemsControl
+                        Margin="200,5"
+                        ItemTemplate="{DynamicResource DataTemplate_Level1}"
+                        ItemsSource="{Binding GameBoardItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
     </DockPanel>
 </Window>

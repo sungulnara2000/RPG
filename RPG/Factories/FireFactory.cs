@@ -12,10 +12,7 @@ namespace RPG.Factories
     {
         public override Unit CreateUnit(IArmy army)
         {
-            var fireMan = new FireMan();
-            fireMan.Army = army;
-            fireMan.Hit = 20;
-            fireMan.Health = 80;
+            var fireMan = new FireMan {Army = army, Hit = 20, Health = 80, Weapons = 5};
             return fireMan;
         }
 
